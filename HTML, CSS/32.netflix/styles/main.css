@@ -1,0 +1,35 @@
+.main {
+    color: var(--text);
+    margin: 1rem;
+    z-index: 1;
+}
+
+.netflix-movie-originals {
+    display: flex;
+    /* justify-content: column; */
+    margin: 1rem;
+    gap: 2rem;
+}
+
+.netflix-movie-originals img {
+    height: 20rem;
+}
+
+.netflix-movie-originals img:hover {
+    height: 40rem;
+}
+
+.netflix-movie-new{
+    display: flex;
+    /* justify-content: column; */
+    margin: 1rem;
+    gap: 2rem;
+}
+
+.netflix-movie-new img {
+    height: 20rem;
+}
+
+.netflix-movie-new img:hover {
+    height: 40rem;
+}
