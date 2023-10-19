@@ -1,15 +1,18 @@
 .header {
     background: url('../assets/images/thumbnails/header_img.jpg');
     background-size: 100% 100%;
+    position: relative;
 }
 
-/* .header::before {
+.header::before {
     content: '';
     background: linear-gradient(to top, var(--primary), transparent);
     position: absolute;
-    height: 50%;
+    height: 100%;
     width: 100%;
-} */
+    z-index: 1;
+    pointer-events: none;
+}
 
 /* top */
 
@@ -21,11 +24,13 @@
 .netflix-logo {
     margin: 10px;
     height: 25px;
+    z-index: 2;
 }
 
 .profile-picture {
     margin: 10px;
     height: 25px;
+    z-index: 2;
 }
 
 /* middle */
@@ -35,6 +40,15 @@
     width: 30rem;
     height: 15rem;
     color: var(--text);
+    position: relative;
+    z-index: 2;
+}
+
+.header-movie-content {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    z-index: 2;
 }
 
 .middle-section h2 {
@@ -45,15 +59,22 @@
 .movie__button {
     background-color: #2e2e2eDD;
     color: var(--text);
-    width: 7em;
-    height: 35px;
-    border: none;
-    border-radius: 6px;
-    margin-bottom: 5px;
-    margin-right: 1rem;
     font-weight: bold;
+    border: none;
+    border-radius: 2rem;
+    width: 7rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    margin-right: 2%;
+    padding: 1rem;
+    cursor: none;
 }
 
 .movie__button:hover {
     background-color: #2e2e2e;
+}
+
+.movie__button:active {
+    transform: scale(1.1);
+    background-color: var(--second);
 }
