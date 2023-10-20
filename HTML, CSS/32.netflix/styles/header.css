@@ -16,25 +16,25 @@
 
 /* top */
 
-.top-section {
+.top-header {
     display: flex;
     justify-content: space-between;
 }
 
 .netflix-logo {
-    margin: 10px;
-    height: 25px;
+    margin: 1rem;
+    height: 2rem;
     z-index: 2;
 }
 
-.profile-picture {
-    margin: 10px;
-    height: 25px;
+.netflix-avatar {
+    margin: 1rem;
+    height: 2rem;
     z-index: 2;
 }
 
 /* middle */
-.middle-section {
+.middle-header {
     margin-left: 1rem;
     margin-top: 10rem;
     width: 30rem;
@@ -44,19 +44,12 @@
     z-index: 2;
 }
 
-.header-movie-content {
-    max-width: 100%;
-    overflow: hidden;
-    word-wrap: break-word;
-    z-index: 2;
-}
-
-.middle-section h2 {
+.middle-header-movie h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.movie__button {
+.middle-header-movie__button {
     background-color: #2e2e2eDD;
     color: var(--text);
     font-weight: bold;
@@ -70,11 +63,18 @@
     cursor: none;
 }
 
-.movie__button:hover {
+.middle-header-movie__button:hover {
     background-color: #2e2e2e;
 }
 
-.movie__button:active {
+.middle-header-movie__button:active {
     transform: scale(1.1);
     background-color: var(--second);
+}
+
+.middle-header-movie__content {
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    z-index: 2;
 }

@@ -1,35 +1,40 @@
 .main {
     color: var(--text);
     margin: 1rem;
-    z-index: 1;
 }
 
-.netflix-movie-originals {
+.main h2 {
+    font-size: 1.8rem;
+}
+
+/* top-section */
+
+.top-section-netflix-movie {
     display: flex;
-    /* justify-content: column; */
-    margin: 1rem;
     gap: 2rem;
 }
 
-.netflix-movie-originals img {
+.top-section-netflix-movie img {
     height: 20rem;
+    flex-grow: 1;
 }
 
-.netflix-movie-originals img:hover {
+.top-section-netflix-movie img:hover {
     height: 40rem;
 }
 
-.netflix-movie-new{
+/* middle-section */
+
+.middle-section-netflix-movie {
     display: flex;
-    /* justify-content: column; */
-    margin: 1rem;
     gap: 2rem;
 }
 
-.netflix-movie-new img {
+.middle-section-netflix-movie img {
     height: 20rem;
+    flex-grow: 1;
 }
 
-.netflix-movie-new img:hover {
+.middle-section-netflix-movie img:hover {
     height: 40rem;
 }
