@@ -48,7 +48,9 @@ const form = document.querySelector('form');
 const title = document.querySelector('h2');
 const emailInput = document.getElementById('email');
 
-form.addEventListener('submit', handleEvent);
+emailInput.value = '';
+
+// form.addEventListener('submit', handleEvent);
 emailInput.addEventListener('keydown', handleEvent);
 
 // console.log(title);
@@ -61,7 +63,7 @@ function handleEvent(e) {
     }
 
     console.log(`Event type: ${e.type}`);
-    console.log(`Event target: ${e.target}`);
+    // console.log(`Event target: ${e.target}`);
     // title.textContent = `MouseX: ${e.offsetX}, MouseY: ${e.offsetY}`;
-    title.innerText = e.target.value;
+    title.textContent = e.target.value;
 }
