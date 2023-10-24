@@ -25,10 +25,11 @@ for(let x in user){
 let i = 0;
 while (i < 10){
     console.log(`Number `+ i);
+    i++;
 }
 
-let i2 = 0;
+let i2 = 100;
 do{
     console.log(`Number `+ i2);
-    i++;
+    i2++;
 }while(i < 10)

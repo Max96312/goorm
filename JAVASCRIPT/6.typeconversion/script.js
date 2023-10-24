@@ -12,9 +12,11 @@ val = [1, 2, 3, 4, 5];
 val = (5).toString();
 
 val = Number(1);
+val = Number(false);
+val = Number([1,2,3]);
 
-val = parseInt(111.40);
-val = parseFloat(111.40);
+val = parseInt('111.40');
+val = parseFloat('111.40');
 
 console.log(val);
 console.log(typeof val);

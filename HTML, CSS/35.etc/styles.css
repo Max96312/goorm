@@ -1,0 +1,56 @@
+/* mediaQuery */
+
+@media (min-width >= 600px){
+    body {
+        font-size: 100px;
+    }
+}
+
+/* containerQuery */
+
+.container {
+    container-type: inline-size;
+    container-name: item-style;
+    border: 3px solid gray;
+    width: 200px;
+    height: 200px;
+    display: grid;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+}
+
+@container item-style (max-width: 200px){
+    .item {
+        background-color: lightgray;
+    }
+}
+
+/* query units */
+
+.modal {
+    position: relative;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+}
