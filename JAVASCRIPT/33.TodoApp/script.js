@@ -8,7 +8,7 @@ createBtn.addEventListener('click', createNewTodo);
 function createNewTodo() {
     const item = {
         id: new Date().getTime(),
-        text: '밥먹기',
+        text: '',
         complete: false
     }
 
@@ -33,7 +33,7 @@ function createTodoElement(item){
     checkboxEl.checked = item.complete;
 
     if(item.complete){
-        itemEl.classList.add('completed');
+        itemEl.classList.add('complete');
     }
 
     const inputEl = document.createElement('input');
@@ -42,8 +42,8 @@ function createTodoElement(item){
 
     inputEl.setAttribute('disabled', '');
 
-    const actionEl = document.createElement('div');
-    actionEl.classList.add('action');
+    const actionsEl = document.createElement('div');
+    actionsEl.classList.add('actions');
 
     const editBtnEl = document.createElement('button');
     editBtnEl.classList.add('material-icons');
@@ -79,17 +79,17 @@ function createTodoElement(item){
     })
 
     removeBtnEl.addEventListener('click', () => {
-        todos = todos.filter(t => t.id!== item.id);
+        todos = todos.filter(t => t.id !== item.id);
         itemEl.remove();
         saveToLocalStorage();
     })
 
-    actionEl.append(editBtnEl);
-    actionEl.append(removeBtnEl);
+    actionsEl.append(editBtnEl);
+    actionsEl.append(removeBtnEl);
 
     itemEl.append(checkboxEl);
     itemEl.append(inputEl);
-    itemEl.append(actionEl);
+    itemEl.append(actionsEl);
 
     return {itemEl, inputEl, editBtnEl, removeBtnEl};
 }

@@ -97,6 +97,8 @@ main {
 }
 
 .actions button {
+    /* display: flex;
+    margin-bottom: 1rem; */
     color: crimson;
     margin-right: 1rem;
     opacity: 0.8;
