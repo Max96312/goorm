@@ -5,3 +5,12 @@
 // ●	위에 기능 외에 잔디밭 기능, Spinner 기능 등 원하는 기능을 추가해봅니다.
 
 const searchUser =  document.querySelector("#search-user");
+
+searchUser.addEventListener("keydown", searchUserHandler);
+
+function searchUserHandler(e){
+    if(e.keyCode === 13){
+        const findUserName = e.addEventListener.target.value;
+        console.log(findUserName);
+    }
+}

@@ -9,12 +9,10 @@
 // console.log(aElement);
 
 // aElement.addEventListener('click', () => {
-//     alert('aElement clicked');
+//     alert('a Element clicked');
 // })
 
 // const buttonElement = document.querySelector('.btn2');
-
-// console.log(buttonElement);
 
 // buttonElement.addEventListener('click', (event) => {
 //     let val;
@@ -22,17 +20,14 @@
 //     val = event.target.id;
 //     val = event.target.className;
 //     val = event.target.classList;
-
 //     val = event.type;
-    
 //     val = event.clientY;
-
 //     val = event.offsetY;
 
 //     console.log(val);
 // })
 
-// const submitBtn = document.querySelector('.submit-btn');
+// console.log(buttonElement);
 
 
 
@@ -44,22 +39,28 @@
 // submitBtn.addEventListener('mouseleave', handleEvent);
 // submitBtn.addEventListener('mousemove', handleEvent);
 
+// const submitBtn = document.querySelector('.submit-btn');
 const form = document.querySelector('form');
+const emailInput = document.getElementById('test-text-input');
 const title = document.querySelector('h2');
-const emailInput = document.getElementById('email');
 
 emailInput.value = '';
 
-// form.addEventListener('submit', handleEvent);
+form.addEventListener('submit', handleEvent);
+
+
+emailInput.addEventListener('input', handleEvent);
 emailInput.addEventListener('keydown', handleEvent);
 
-// console.log(title);
-// console.log(emailInput);
-// console.log(form);
+// emailInput.addEventListener('input', handleEvent);
+// emailInput.addEventListener('focus', handleEvent);
+// emailInput.addEventListener('blur', handleEvent);
+
 
 function handleEvent(e) {
-    if(e.type ==='submit') {
+    if(e.type ==='input') {
         e.preventDefault();
+        console.log(`Event type: ${e.type}`);
     }
 
     console.log(`Event type: ${e.type}`);
