@@ -1,16 +1,24 @@
-// ●	자바스크립트 OOP를 이용해서 구현합니다.
+const github = new GitHub();
+const ui = new UI();
 
-// ●	비동기 통신을 이용합니다.
+const searchUser = document.querySelector("#search-user");
 
-// ●	위에 기능 외에 잔디밭 기능, Spinner 기능 등 원하는 기능을 추가해봅니다.
+searchUser.addEventListener("keypress", (e) => {
+  const userText = e.target.value;
 
-const searchUser =  document.querySelector("#search-user");
-
-searchUser.addEventListener("keydown", searchUserHandler);
-
-function searchUserHandler(e){
-    if(e.keyCode === 13){
-        const findUserName = e.addEventListener.target.value;
-        console.log(findUserName);
+  if(e.key === "Enter") {
+    if (userText !== "") {
+        github.getUser(userText).then((data) => {
+          console.log(data);
+          if (data.profile.message === "Not Found") {
+            ui.showAlert("User not found", "alert alert-danger");
+          } else {
+            ui.showProfile(data.profile);
+            ui.showRepos(data.repos);
+          }
+        });
+      } else {
+        ui.clearProfile();
+      }
     }
-}
+});
