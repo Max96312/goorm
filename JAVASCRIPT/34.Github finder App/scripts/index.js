@@ -16,7 +16,7 @@ searchUser.addEventListener("keypress", (e) => {
           } else {
             ui.showProfile(data.profile);
             ui.showRepos(data.repos);
-            ui.showContributors(data.contributors);
+            // ui.showContributors(data.contributors);
           }
         });
       } else {
