@@ -33,10 +33,10 @@ class UI {
      `;
     }
 
-    showContributors(contributors) {
-      const contributionElement = document.createElement('div');
-      contributionElement.innerHTML = `<div class="badge badge-info">Contributions: ${contributionCount}</div>`;
-    }
+    // showContributors(contributors) {
+    //   const contributionElement = document.createElement('div');
+    //   contributionElement.innerHTML = `<div class="badge badge-info">Contributions: ${contributionCount}</div>`;
+    // }
   
     showRepos(repos) {
       let output = "";
