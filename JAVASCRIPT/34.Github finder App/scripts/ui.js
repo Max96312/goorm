@@ -4,7 +4,7 @@ class UI {
     }
   
     showProfile(user) {
-      console.log("user", user);
+      // console.log("user", user);
       this.profile.innerHTML = `
         <div class="card card-body mb-3">
            <div class="row">
@@ -32,11 +32,18 @@ class UI {
         <div id="repos"></div>
      `;
     }
+
+    showContributors(contributors) {
+      const contributionElement = document.createElement('div');
+      contributionElement.innerHTML = `<div class="badge badge-info">Contributions: ${contributionCount}</div>`;
+    }
   
     showRepos(repos) {
       let output = "";
-  
+      // console.log("repos", repos);
+
       repos.forEach((repo) => {
+        // console.log("repo", repo);
         output += `
         <div class="card card-body mb-2">
            <div class="row">
@@ -55,7 +62,11 @@ class UI {
   
       document.querySelector("#repos").innerHTML = output;
     }
-  
+
+    showContributors(contributors){
+      
+    }
+
     showAlert(message, className) {
       this.clearAlert();
       const div = document.createElement("div");
@@ -69,7 +80,7 @@ class UI {
         this.clearAlert();
       }, 3000);
     }
-  
+    
     clearAlert() {
       const currentAlert = document.querySelector(".alert");
   
