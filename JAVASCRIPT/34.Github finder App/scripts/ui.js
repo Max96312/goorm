@@ -63,10 +63,6 @@ class UI {
       document.querySelector("#repos").innerHTML = output;
     }
 
-    showContributors(contributors){
-      
-    }
-
     showAlert(message, className) {
       this.clearAlert();
       const div = document.createElement("div");
