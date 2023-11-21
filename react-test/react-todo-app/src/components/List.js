@@ -1,56 +1,48 @@
 import React from 'react'
 
-export default function List({todoData, setTodoData}) {
+const List = ({id, title, completed, todoData, setTodoData, provided, snapshot, }) => {
+  
+  const handleClick = (id) => {
+    let newTodoData = todoData.filter((data) => data.id !== id)
+    console.log('newTodoData', newTodoData);
+    setTodoData(newTodoData);
+  };
 
-    const btnStyle = {
-        color: "#fff",
-        border: "none",
-        padding: "5px 9px",
-        borderRadius: "50%",
-        cursor: "pointer",
-        float: "right"
+  const handleCompleteChange = (id) => {
+    let newTodoData = todoData.map((data) => {
+      if(data.id === id){
+        data.completed = !data.completed;
       }
-
-      const handleCompleteChange = (id) => {
-        let newTodoData = todoData.map((data) => {
-          if(data.id === id){
-            data.completed = !data.completed;
-          }
-          return data;
-        });
-        setTodoData(newTodoData);
-      };
-
-      const getStyle = (completed) => {
-        return {
-          padding: "10px",
-          borderBottom: "1px #ccc dotted",
-          textDecoration : completed ? "line-through": "none",
-        }
-      }
-    
-    
-      const handleClick = (id) => {
-        let newTodoData = todoData.filter(data => data.id !== id);
-        setTodoData(newTodoData)
-      }
+      return data;
+    })
+    setTodoData(newTodoData);
+  };
 
   return (
-    <div>
-        {todoData.map((data) => (
-        <div style={getStyle(data.completed)} key={data.id}>
-            <p>
-            <input
-             type="checkbox"
-             defaultChecked={data.completed}
-             onChange={() => handleCompleteChange(data.id)}/>
-            {" "}
-            <button style={btnStyle} onClick={() => handleClick(data.id)}>
-                X
-            </button>
-            </p>
-      </div>
-    ))}
+    <div
+    key={id}
+    {...(provided && provided.draggableProps)}
+    ref={provided ? provided.innerRef : null}
+    {...(provided && provided.dragHandleProps)}
+    className={`${snapshot && snapshot.isDragging ? "bg-gray-400" : "bg-gray-100"} flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded`}
+  >
+    <div className='item-center'>
+      <input
+          type="checkbox"
+          defaultChecked={completed}
+          onChange={() => handleCompleteChange(id)}
+          />{" "}
+      <span className={completed ? "line-through" :undefined}>
+          {title}
+      </span>
     </div>
+    <div className='items-center'>
+      <button className="px-4 py-2 float-right" onClick={() => handleClick(id)}>
+        x
+      </button>
+    </div>
+</div>
   )
 }
+
+export default List

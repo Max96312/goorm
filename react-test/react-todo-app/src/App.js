@@ -1,23 +1,12 @@
 import React, {useState} from "react";
 import "./App.css";
 import List from "./components/List";
+import Form from "./components/Form";
 
-export default function App(){
-
-  // const state = {
-  //   todoData: [],
-  //   value: "",
-  // };
+export default function App() {
 
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
-
-
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    console.log(e.target.value);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,39 +17,22 @@ export default function App(){
       completed: false,
     };
 
-    setTodoData(prev => [...prev, newTodo]);
-    setValue("");
+    setTodoData((prev) => 
+      [...prev, newTodo]);
+      setValue("");
   }
 
 
-
     return(
-      <div className = "container">
-        <div className="todoBlock">
-          <div className= "title">
-            <h1>할 일 목록</h1>
+      <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
+        <div className="w-full p-5 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
+          <div className="flex justify-between mb-3">
+          <h1>할 일 목록</h1>
           </div>
+          <List todoData={todoData} setTodoData={setTodoData} />
+          <Form handleSubmit={handleSubmit} value={value} setValue={setValue}/>
 
-          <List todoData={todoData} setTodoData={setTodoData}/>
 
-          
-
-          <form style={{diplay: 'flex'}} onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="value"
-              style={{flex: "10", padding: "5px"}}
-              placeholder="해야 할 일을 입력하세요."
-              value={value}
-              onChange={handleChange}
-            />
-            <input
-              type="submit"
-              value="입력"
-              className="btn"
-              style={{flex: '1'}}
-            />
-          </form>
         </div>
       </div>
     )
