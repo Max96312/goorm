@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense, handleDelete }) => {
   return (
     <li>
         <div>
