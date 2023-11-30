@@ -5,7 +5,7 @@ public class MyLinkedList<T> {
         this.head = null;
     }
 
-    public void addAtTail(T data) {
+    public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
             head = newNode;
@@ -19,7 +19,7 @@ public class MyLinkedList<T> {
         current.nextNode = newNode;
     }
 
-    public void deleteAtIndex(int index) {
+    public void delete(int index) {
         if (head == null) {
             return;
         }
@@ -56,16 +56,16 @@ public class MyLinkedList<T> {
     public static void main(String[] args) {
         MyLinkedList<Integer> myList = new MyLinkedList<>();
 // 노드 추가
-        myList.addAtTail(1);
-        myList.addAtTail(2);
-        myList.addAtTail(3);
-        myList.addAtTail(4);
+        myList.add(1);
+        myList.add(2);
+        myList.add(3);
+        myList.add(4);
 // 노드 출력
         myList.printList();
 
 
 // 노트 삭제
-        myList.deleteAtIndex(2);
+        myList.delete(2);
 // 노드 출력
         myList.printList();
     }
