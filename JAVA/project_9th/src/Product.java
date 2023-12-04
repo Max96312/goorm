@@ -10,10 +10,6 @@ public class Product {
         this.price = price;
     }
 
-    public int getKey() {
-        return key;
-    }
-
     public String getName() {
         return name;
     }
