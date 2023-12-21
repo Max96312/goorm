@@ -1,4 +1,4 @@
-package com.example.project10th.error;
+package com.example.project10th.exception;
 
 import lombok.Data;
 

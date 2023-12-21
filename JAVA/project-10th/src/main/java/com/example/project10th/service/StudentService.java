@@ -1,27 +1,29 @@
 package com.example.project10th.service;
 
-import com.example.project10th.models.entity.Student;
+import com.example.project10th.domain.Student;
 import com.example.project10th.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class StudentService {
-    @Autowired
-    StudentRepository studentRepository;
+@RequiredArgsConstructor
+public class StudentService{
 
-    public void save(Student student) {
-        studentRepository.save(student);
+    private final StudentRepository studentRepo;
+    public Student createStudent(String name, int grade){
+        Student student = new Student(name, grade);
+        studentRepo.create(student);
+        return student;
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<Student> getAll(){
+        return  studentRepo.getAll();
     }
 
-    public List<Student> getStudentsByGrade(int grade) {
-        return studentRepository.findByGradeOrderByGradeAsc(grade);
+    public List<Student> get(int grade) {
+        return studentRepo.get(grade);
     }
 }

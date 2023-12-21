@@ -1,86 +1,63 @@
 package com.example.project10th.controller;
 
-import com.example.project10th.error.InputRestriction;
-import com.example.project10th.models.request.StudentRequest;
-import com.example.project10th.models.response.Metadata;
-import com.example.project10th.models.response.Status;
-import com.example.project10th.models.entity.Student;
-import com.example.project10th.error.ErrorCode;
-import com.example.project10th.error.CustomException;
+import com.example.project10th.domain.Student;
+import com.example.project10th.exception.CustomException;
+import com.example.project10th.exception.ErrorCode;
+import com.example.project10th.exception.InputRestriction;
 import com.example.project10th.models.response.ApiResponse;
 import com.example.project10th.service.StudentService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
+@RequiredArgsConstructor
 public class ApiController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    @PostMapping("/create")
-    public ApiResponse<Student> createStudent(@RequestBody StudentRequest studentRequest) {
-        try {
-            if (studentRequest.getGrade() > 6) {
-                throw new CustomException(ErrorCode.INVALID_GRADE, "grade는 6이상을 입력 할 수 없습니다.", new InputRestriction(6));
-            }
-            Student studentEntity = studentRequest.toEntity();
-            return makeResponse(studentEntity);
-        } catch (CustomException e) {
-            return handleException(e);
+    @GetMapping("/student/create")
+    public ApiResponse<Student> create(@RequestParam("name") String name,
+                                       @RequestParam("grade") int grade) {
+        if(grade > 5){
+            throw new CustomException(ErrorCode.BAD_REQUEST, "grade 는 6 이상을 입력 할 수 없습니다.", new InputRestriction(6));
         }
+
+        Student student = studentService.createStudent(name, grade);
+
+        return makeResponse(student);
     }
 
-    @GetMapping("/grades")
-    public ApiResponse<Student> getAllStudents() {
-        List<Student> students = studentService.getAllStudents();
-            return makeResponse(students);
-    }
-
-    @GetMapping("/grades/{grade}")
-    public ApiResponse<Student> getStudentsByGrade(@PathVariable int grade) {
-        List<Student> students = studentService.getStudentsByGrade(grade);
+    @GetMapping("/student")
+    public ApiResponse<Student> get(@RequestParam("grade") int grade){
+        List<Student> students = studentService.get(grade);
         return makeResponse(students);
     }
 
-    private ApiResponse<Student> makeResponse(Student student) {
-        ApiResponse<Student> response = new ApiResponse<>();
-        response.setStatus(new Status(2000, "OK"));
-        response.setMetadata(new Metadata(1));
-        List<Student> results = new ArrayList<>();
-        results.add(student);
-        response.setResults(results);
-        return response;
-    }
-    Stream
-    private ApiResponse<Student> makeResponse(List<Student> students) {
-        ApiResponse<Student> response = new ApiResponse<>();
-        response.setStatus(new Status(2000, "OK"));
-        response.setMetadata(new Metadata(students.size()));
-        response.setResults(students);
-        return response;
+    @GetMapping("/student/getAll")
+    public ApiResponse<Student> getAll(){
+        List<Student> students = studentService.getAll();
+
+        return makeResponse(students);
     }
 
-    private ApiResponse<Student> handleException(CustomException e) {
-        return new ApiResponse<>(
-                new Status(e.getErrorCode().ordinal(), e.getMessage()),
-                new Metadata(),
-                null
-        );
+    public <T> ApiResponse<T> makeResponse(T result){
+        return makeResponse(Collections.singletonList(result));
+    }
+
+    public <T> ApiResponse<T> makeResponse(List<T> results){
+        return new ApiResponse<>(results);
     }
 
     @ExceptionHandler(CustomException.class)
-    @ResponseBody
-    public ApiResponse<Student> customExceptionHandler(HttpServletResponse response, CustomException e) {
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return new ApiResponse<>(new Status(e.getErrorCode().ordinal(), e.getMessage()), new Metadata(), null);
+    public <T> ApiResponse<T> customExceptionHandler(HttpServletResponse response,
+                                                     CustomException exception){
+        response.setStatus(exception.getErrorCode().getHttpStatus().value());
+        return new ApiResponse<T>(exception.getErrorCode().getCode(), exception.getMessage(), exception.getData());
     }
-
 }
