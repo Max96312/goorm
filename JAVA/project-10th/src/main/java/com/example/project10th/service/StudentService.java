@@ -19,8 +19,8 @@ public class StudentService{
         return student;
     }
 
-    public List<Student> getAll(){
-        return  studentRepo.getAll();
+    public List<Student> findAll(){
+        return  studentRepo.findAll();
     }
 
     public List<Student> get(int grade) {

@@ -17,7 +17,7 @@ public class StudentRepository {
         students.add(student);
     }
 
-    public List<Student> getAll(){
+    public List<Student> findAll(){
         return new ArrayList<>(students);
     }
 

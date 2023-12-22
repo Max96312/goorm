@@ -6,22 +6,23 @@ import com.example.project10th.exception.ErrorCode;
 import com.example.project10th.exception.InputRestriction;
 import com.example.project10th.models.response.ApiResponse;
 import com.example.project10th.service.StudentService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
 
+@Slf4j
+@RequestMapping("/student")
 @RestController
 @RequiredArgsConstructor
 public class ApiController {
 
     private final StudentService studentService;
 
-    @GetMapping("/student/create")
+    @PostMapping("/create")
     public ApiResponse<Student> create(@RequestParam("name") String name,
                                        @RequestParam("grade") int grade) {
         if(grade > 5){
@@ -29,19 +30,23 @@ public class ApiController {
         }
 
         Student student = studentService.createStudent(name, grade);
+        log.info("student={}", student);
 
         return makeResponse(student);
     }
 
-    @GetMapping("/student")
+    @PostMapping
     public ApiResponse<Student> get(@RequestParam("grade") int grade){
         List<Student> students = studentService.get(grade);
+        log.info("students={}", students);
+
         return makeResponse(students);
     }
 
-    @GetMapping("/student/getAll")
-    public ApiResponse<Student> getAll(){
-        List<Student> students = studentService.getAll();
+    @PostMapping("/findAll")
+    public ApiResponse<Student> findAll(){
+        List<Student> students = studentService.findAll();
+        log.info("students={}", students);
 
         return makeResponse(students);
     }
@@ -58,6 +63,7 @@ public class ApiController {
     public <T> ApiResponse<T> customExceptionHandler(HttpServletResponse response,
                                                      CustomException exception){
         response.setStatus(exception.getErrorCode().getHttpStatus().value());
-        return new ApiResponse<T>(exception.getErrorCode().getCode(), exception.getMessage(), exception.getData());
+
+        return new ApiResponse<>(exception.getErrorCode().getCode(), exception.getMessage(), exception.getData());
     }
 }
