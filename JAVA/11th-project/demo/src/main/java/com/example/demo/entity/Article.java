@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Article {
     @Id
-    @GeneratedValue
+    @GeneratedValue(st)
     private Long id;
 
     @Column
